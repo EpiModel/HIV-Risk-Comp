@@ -1,7 +1,5 @@
 
-### prep.FUN = prep.mard
-
-prep.sti <- function(dat, at) {
+prep.rc <- function(dat, at) {
 
   if (at < dat$param$prep.start) {
     return(dat)
@@ -36,7 +34,6 @@ prep.sti <- function(dat, at) {
     idsEligStop <- which(active == 1 & prepStat == 1 & lnt == at)
   }
 
-  ## TODO: add STI dx as independent criterion
   # Core eligiblity scenarios
   if (prep.elig.model != "base") {
     if (substr(prep.elig.model, 1, 3) == "cdc") {

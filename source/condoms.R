@@ -1,7 +1,5 @@
 
-### condoms.FUN = condoms.mard
-
-condoms.sti <- function(dat, at) {
+condoms.rc <- function(dat, at) {
 
   for (type in c("main", "pers", "inst")) {
 
@@ -151,4 +149,3 @@ condoms.sti <- function(dat, at) {
 
   return(dat)
 }
-

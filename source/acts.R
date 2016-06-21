@@ -1,7 +1,5 @@
 
-### acts.FUN = acts.mard
-
-acts.sti <- function(dat, at) {
+acts.rc <- function(dat, at) {
 
   for (type in c("main", "pers", "inst")) {
 
@@ -60,8 +58,6 @@ acts.sti <- function(dat, at) {
         (num.B == 1) * base.ai.BW.rate +
         (num.B == 0) * base.ai.WW.rate
       ai.rate <- ai.rate * ai.scale
-
-      ## TODO: STI associated cessation of activity
 
       # Final act number
       if (fixed == FALSE) {

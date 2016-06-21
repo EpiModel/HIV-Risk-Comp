@@ -1,7 +1,5 @@
 
-### trans.FUN = trans.mard
-
-trans.sti <- function(dat, at){
+trans.rc <- function(dat, at) {
 
   ## Variables
 
@@ -12,7 +10,6 @@ trans.sti <- function(dat, at){
   circ <- dat$attr$circ
   diag.status <- dat$attr$diag.status
   tx.status <- dat$attr$tx.status
-  race <- dat$attr$race
   prepStat <- dat$attr$prepStat
   prepClass <- dat$attr$prepClass
 

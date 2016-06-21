@@ -1,5 +1,5 @@
 
-initialize.sti <- function(x, param, init, control, s) {
+initialize.rc <- function(x, param, init, control, s) {
 
   # Master data list
   dat <- list()
@@ -95,11 +95,7 @@ initialize.sti <- function(x, param, init, control, s) {
   dat$attr$prepStat <- rep(0, num)
   dat$attr$prepEver <- rep(0, num)
 
-  # TODO: STI/GC status
-  # initialize based on random draw around assumed target prevalence
-
   # Risk history lists
-  # TODO: add STI diagnosis as PrEP indication
   nc <- ceiling(dat$param$prep.risk.int)
   dat$riskh <- list()
   rh.names <- c("uai.mono2.nt.3mo", "uai.mono2.nt.6mo",

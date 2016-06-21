@@ -1,5 +1,5 @@
 
-test.sti <- function(dat, at) {
+test.rc <- function(dat, at) {
 
   ## Variables
 

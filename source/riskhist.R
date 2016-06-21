@@ -1,7 +1,5 @@
 
-### riskhist.FUN = riskhist.mard
-
-riskhist.sti <- function(dat, at) {
+riskhist.rc <- function(dat, at) {
 
   if (at < dat$param$riskh.start) {
     return(dat)
