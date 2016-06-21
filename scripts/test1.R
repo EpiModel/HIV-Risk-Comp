@@ -2,7 +2,7 @@
 ## Test Script for stiPrEP Project
 
 library(EpiModelHIVmsm)
-sourceDir("source/", TRUE)
+EpiModelHPC::sourceDir("source/", TRUE)
 
 load("est/nwstats.10k.rda")
 
@@ -31,14 +31,14 @@ control <- control.msm(simno = 1,
                        save.int = 5000,
                        verbose.int = 1,
                        save.other = c("attr", "temp", "riskh", "el", "p"),
-                       acts.FUN = acts.sti,
-                       condoms.FUN = condoms.sti,
-                       initialize.FUN = initialize.sti,
-                       prep.FUN = prep.sti,
-                       prev.FUN = prevalence.sti,
-                       riskhist.FUN = riskhist.sti,
-                       trans.FUN = trans.sti,
-                       test.FUN = test.sti)
+                       acts.FUN = acts.rc,
+                       condoms.FUN = condoms.rc,
+                       initialize.FUN = initialize.rc,
+                       prep.FUN = prep.rc,
+                       prev.FUN = prevalence.rc,
+                       riskhist.FUN = riskhist.rc,
+                       trans.FUN = trans.rc,
+                       test.FUN = test.rc)
 
 load("est/fit.10k.rda")
 sim <- netsim(est, param, init, control)
@@ -79,14 +79,14 @@ control <- control.msm(simno = 1,
                        save.int = 5000,
                        verbose.int = 1,
                        save.other = NULL,
-                       acts.FUN = acts.sti,
-                       condoms.FUN = condoms.sti,
+                       acts.FUN = acts.rc,
+                       condoms.FUN = condoms.rc,
                        initialize.FUN = reinit.msm,
-                       prep.FUN = prep.sti,
-                       prev.FUN = prevalence.sti,
+                       prep.FUN = prep.rc,
+                       prev.FUN = prevalence.rc,
                        riskhist.FUN = riskhist.msm,
-                       trans.FUN = trans.sti,
-                       test.FUN = test.sti)
+                       trans.FUN = trans.rc,
+                       test.FUN = test.rc)
 
 ## Simulation
 load("est/p2.burnin.rda")
@@ -97,20 +97,20 @@ for (at in 2601:2750) {
   dat <- aging.msm(dat, at)
   dat <- deaths.msm(dat, at)
   dat <- births.msm(dat, at)
-  dat <- test.sti(dat, at)
+  dat <- test.rc(dat, at)
   dat <- tx.msm(dat, at)
-  dat <- prep.sti(dat, at)
+  dat <- prep.rc(dat, at)
   dat <- progress.msm(dat, at)
   dat <- update_vl.msm(dat, at)
   dat <- edges_correct.msm(dat, at)
   dat <- simnet.msm(dat, at)
   dat <- disclose.msm(dat, at)
-  dat <- acts.sti(dat, at)
-  dat <- condoms.sti(dat, at)
+  dat <- acts.rc(dat, at)
+  dat <- condoms.rc(dat, at)
   dat <- riskhist.msm(dat, at)
   dat <- position.msm(dat, at)
-  dat <- trans.sti(dat, at)
-  dat <- prevalence.sti(dat, at)
+  dat <- trans.rc(dat, at)
+  dat <- prevalence.rc(dat, at)
   cat("*")
 }
 
