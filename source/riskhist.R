@@ -135,10 +135,6 @@ riskhist_rc <- function(dat, at) {
   dat$riskh$uai.sd.mc[, pri] <- 0
   dat$riskh$uai.sd.mc[uai.sd.mc, pri] <- 1
 
-
-  ## TODO: Condition 4, any STI diagnosis
-
-
   return(dat)
 }
 

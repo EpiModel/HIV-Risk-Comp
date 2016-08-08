@@ -1,12 +1,12 @@
 
 ## Test Script for stiPrEP Project
 
-library(EpiModelHIVmsm)
+library("EpiModelHIV")
 EpiModelHPC::sourceDir("source/", TRUE)
 
 load("est/nwstats.10k.rda")
 
-param <- param.msm(nwstats = st,
+param <- param_msm(nwstats = st,
                    testing.pattern = "interval",
                    ai.scale = 1.323,
                    riskh.start = 1,
@@ -23,22 +23,22 @@ param <- param.msm(nwstats = st,
                    rcomp.adh.groups = 0:4,
                    rcomp.main.only = FALSE,
                    rcomp.discl.only = FALSE)
-init <- init.msm(nwstats = st, prev.B = 0.253, prev.W = 0.253)
-control <- control.msm(simno = 1,
+init <- init_msm(nwstats = st, prev.B = 0.253, prev.W = 0.253)
+control <- control_msm(simno = 1,
                        nsteps = 100,
                        nsims = 1,
                        ncores = 1,
                        save.int = 5000,
                        verbose.int = 1,
                        save.other = c("attr", "temp", "riskh", "el", "p"),
-                       acts.FUN = acts.rc,
-                       condoms.FUN = condoms.rc,
-                       initialize.FUN = initialize.rc,
-                       prep.FUN = prep.rc,
-                       prev.FUN = prevalence.rc,
-                       riskhist.FUN = riskhist.rc,
-                       trans.FUN = trans.rc,
-                       test.FUN = test.rc)
+                       acts.FUN = acts_rc,
+                       condoms.FUN = condoms_rc,
+                       initialize.FUN = initialize_rc,
+                       prep.FUN = prep_rc,
+                       prev.FUN = prevalence_rc,
+                       riskhist.FUN = riskhist_rc,
+                       trans.FUN = trans_rc,
+                       test.FUN = test_rc)
 
 load("est/fit.10k.rda")
 sim <- netsim(est, param, init, control)
@@ -53,7 +53,7 @@ sourceDir("source/", TRUE)
 ai.scale <- 1.323
 prev <- 0.253
 
-param <- param.msm(nwstats = st,
+param <- param_msm(nwstats = st,
                    testing.pattern = "interval",
                    ai.scale = ai.scale,
                    riskh.start = 2450,
@@ -70,8 +70,8 @@ param <- param.msm(nwstats = st,
                    rcomp.hadhr.only = TRUE,
                    rcomp.main.only = FALSE,
                    rcomp.discl.only = FALSE)
-init <- init.msm(st)
-control <- control.msm(simno = 1,
+init <- init_msm(st)
+control <- control_msm(simno = 1,
                        start = 2601,
                        nsteps = (52 * 50) + 100,
                        nsims = 1,
@@ -79,38 +79,38 @@ control <- control.msm(simno = 1,
                        save.int = 5000,
                        verbose.int = 1,
                        save.other = NULL,
-                       acts.FUN = acts.rc,
-                       condoms.FUN = condoms.rc,
-                       initialize.FUN = reinit.msm,
-                       prep.FUN = prep.rc,
-                       prev.FUN = prevalence.rc,
-                       riskhist.FUN = riskhist.msm,
-                       trans.FUN = trans.rc,
-                       test.FUN = test.rc)
+                       acts.FUN = acts_rc,
+                       condoms.FUN = condoms_rc,
+                       initialize.FUN = reinit_msm,
+                       prep.FUN = prep_rc,
+                       prev.FUN = prevalence_rc,
+                       riskhist.FUN = riskhist_msm,
+                       trans.FUN = trans_rc,
+                       test.FUN = test_rc)
 
 ## Simulation
 load("est/p2.burnin.rda")
 # sim <- netsim(sim, param, init, control)
 
-dat <- reinit.msm(sim, param, init, control, s = 1)
+dat <- reinit_msm(sim, param, init, control, s = 1)
 for (at in 2601:2750) {
-  dat <- aging.msm(dat, at)
-  dat <- deaths.msm(dat, at)
-  dat <- births.msm(dat, at)
-  dat <- test.rc(dat, at)
-  dat <- tx.msm(dat, at)
-  dat <- prep.rc(dat, at)
-  dat <- progress.msm(dat, at)
-  dat <- update_vl.msm(dat, at)
-  dat <- edges_correct.msm(dat, at)
-  dat <- simnet.msm(dat, at)
-  dat <- disclose.msm(dat, at)
-  dat <- acts.rc(dat, at)
-  dat <- condoms.rc(dat, at)
-  dat <- riskhist.msm(dat, at)
-  dat <- position.msm(dat, at)
-  dat <- trans.rc(dat, at)
-  dat <- prevalence.rc(dat, at)
+  dat <- aging_msm(dat, at)
+  dat <- deaths_msm(dat, at)
+  dat <- births_msm(dat, at)
+  dat <- test_rc(dat, at)
+  dat <- tx_msm(dat, at)
+  dat <- prep_rc(dat, at)
+  dat <- progress_msm(dat, at)
+  dat <- update_vl_msm(dat, at)
+  dat <- edges_correct_msm(dat, at)
+  dat <- simnet_msm(dat, at)
+  dat <- disclose_msm(dat, at)
+  dat <- acts_rc(dat, at)
+  dat <- condoms_rc(dat, at)
+  dat <- riskhist_msm(dat, at)
+  dat <- position_msm(dat, at)
+  dat <- trans_rc(dat, at)
+  dat <- prevalence_rc(dat, at)
   cat("*")
 }
 

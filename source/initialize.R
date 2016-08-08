@@ -17,7 +17,7 @@ initialize_rc <- function(x, param, init, control, s) {
   nw <- list()
   for (i in 1:3) {
     nw[[i]] <- simulate(x[[i]]$fit)
-    nw[[i]] <- EpiModelHIVmsm:::remove_bad_roles(nw[[i]])
+    nw[[i]] <- remove_bad_roles_msm(nw[[i]])
   }
 
   ## Build initial edgelists
@@ -141,7 +141,7 @@ initialize_rc <- function(x, param, init, control, s) {
   dat$temp$discl.list <- matrix(NA, nrow = 0, ncol = 3)
   colnames(dat$temp$discl.list) <- c("pos", "neg", "discl.time")
 
-  dat <- prevalence.sti(dat, at = 1)
+  dat <- prevalence_rc(dat, at = 1)
 
   class(dat) <- "dat"
   return(dat)

@@ -1,7 +1,7 @@
 
 ## Analysis script for HIV risk compensation paper
 
-suppressPackageStartupMessages(library(EpiModelHIVmsm))
+suppressMessages(library(EpiModelHIV))
 source("analysis/fx.R")
 
 # scp hyak:/gscratch/csde/camp/data/save/*.rda data/
