@@ -1,7 +1,7 @@
 
 ## Packages
 library("methods")
-suppressPackageStartupMessages(library("EpiModelHIVmsm"))
+suppressMessages(library("EpiModelHIV"))
 sourceDir("source/", FALSE)
 
 ## Environmental Arguments
@@ -19,7 +19,7 @@ rc4 <- as.logical(args[8])
 fsimno <- paste(simno, jobno, sep = ".")
 load("est/nwstats.10k.rda")
 
-param <- param.msm(nwstats = st,
+param <- param_msm(nwstats = st,
                    testing.pattern = "interval",
                    ai.scale = 1.323,
                    riskh.start = 2450,
@@ -36,8 +36,8 @@ param <- param.msm(nwstats = st,
                    rcomp.adh.groups = rc2,
                    rcomp.main.only = rc3,
                    rcomp.discl.only = rc4)
-init <- init.msm(st)
-control <- control.msm(simno = fsimno,
+init <- init_msm(st)
+control <- control_msm(simno = fsimno,
                        start = 2601,
                        nsteps = (52 * 50) + 520,
                        nsims = 32,
@@ -45,14 +45,14 @@ control <- control.msm(simno = fsimno,
                        save.int = 5000,
                        verbose.int = 5000,
                        save.other = NULL,
-                       acts.FUN = acts.sti,
-                       condoms.FUN = condoms.sti,
-                       initialize.FUN = reinit.msm,
-                       prep.FUN = prep.sti,
-                       prev.FUN = prevalence.sti,
-                       riskhist.FUN = riskhist.msm,
-                       trans.FUN = trans.sti,
-                       test.FUN = test.sti)
+                       acts.FUN = acts_rc,
+                       condoms.FUN = condoms_rc,
+                       initialize.FUN = reinit_msm,
+                       prep.FUN = prep_rc,
+                       prev.FUN = prevalence_rc,
+                       riskhist.FUN = riskhist_rc,
+                       trans.FUN = trans_rc,
+                       test.FUN = test_rc)
 
 ## Simulation
 netsim_hpc("est/p2.burnin.rda", param, init, control, compress = "xz",

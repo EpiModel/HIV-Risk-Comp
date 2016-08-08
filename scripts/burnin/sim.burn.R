@@ -39,14 +39,14 @@ control <- control_msm(simno = fsimno,
                        save.int = 5000,
                        verbose.int = 100,
                        save.other = c("attr", "temp", "riskh", "el", "p"),
-                       acts.FUN = acts.rc,
-                       condoms.FUN = condoms.rc,
-                       initialize.FUN = initialize.rc,
-                       prep.FUN = prep.rc,
-                       prev.FUN = prevalence.rc,
-                       riskhist.FUN = riskhist.rc,
-                       trans.FUN = trans.rc,
-                       test.FUN = test.rc)
+                       acts.FUN = acts_rc,
+                       condoms.FUN = condoms_rc,
+                       initialize.FUN = initialize_rc,
+                       prep.FUN = prep_rc,
+                       prev.FUN = prevalence_rc,
+                       riskhist.FUN = riskhist_rc,
+                       trans.FUN = trans_rc,
+                       test.FUN = test_rc)
 
 ## Simulation
 # netsim_hpc("est/fit.10k.rda", param, init, control, compress = "xz",
