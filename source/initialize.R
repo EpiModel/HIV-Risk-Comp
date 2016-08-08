@@ -1,5 +1,5 @@
 
-initialize.rc <- function(x, param, init, control, s) {
+initialize_rc <- function(x, param, init, control, s) {
 
   # Master data list
   dat <- list()

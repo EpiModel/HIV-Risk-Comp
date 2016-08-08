@@ -1,7 +1,7 @@
 
 ### getprev.FUN = prevalence.mard
 
-prevalence.sti <- function(dat, at) {
+prevalence_rc <- function(dat, at) {
 
   active <- dat$attr$active
   race <- dat$attr$race

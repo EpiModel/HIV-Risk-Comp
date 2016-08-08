@@ -1,5 +1,5 @@
 
-condoms.rc <- function(dat, at) {
+condoms_rc <- function(dat, at) {
 
   for (type in c("main", "pers", "inst")) {
 

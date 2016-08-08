@@ -1,5 +1,5 @@
 
-riskhist.rc <- function(dat, at) {
+riskhist_rc <- function(dat, at) {
 
   if (at < dat$param$riskh.start) {
     return(dat)

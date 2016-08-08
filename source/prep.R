@@ -1,5 +1,5 @@
 
-prep.rc <- function(dat, at) {
+prep_rc <- function(dat, at) {
 
   if (at < dat$param$prep.start) {
     return(dat)

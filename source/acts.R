@@ -1,5 +1,5 @@
 
-acts.rc <- function(dat, at) {
+acts_rc <- function(dat, at) {
 
   for (type in c("main", "pers", "inst")) {
 

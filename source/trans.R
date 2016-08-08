@@ -1,5 +1,5 @@
 
-trans.rc <- function(dat, at) {
+trans_rc <- function(dat, at) {
 
   ## Variables
 
