@@ -173,8 +173,10 @@ trans.rc <- function(dat, at) {
   # Summary Output
   dat$epi$incid[at] <- length(infected)
 
-  dat$epi$incid.cai[at] <- sum(trans.ip[disc.ip[, "uai"] == 0]) + sum(trans.rp[disc.rp[, "uai"] == 0])
-  dat$epi$incid.uai[at] <- sum(trans.ip[disc.ip[, "uai"] == 1]) + sum(trans.rp[disc.rp[, "uai"] == 1])
+  dat$epi$incid.cai[at] <- sum(trans.ip[disc.ip[, "uai"] == 0]) +
+    sum(trans.rp[disc.rp[, "uai"] == 0])
+  dat$epi$incid.uai[at] <- sum(trans.ip[disc.ip[, "uai"] == 1]) +
+    sum(trans.rp[disc.rp[, "uai"] == 1])
   dat$epi$incid.cai.perc[at] <- dat$epi$incid.cai[at] / dat$epi$incid[at]
 
   if (at >= dat$param$prep.start) {

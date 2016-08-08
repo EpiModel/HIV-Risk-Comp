@@ -1,7 +1,7 @@
 
 ## Packages
 library("methods")
-suppressPackageStartupMessages(library("EpiModelHIVmsm"))
+suppressMessages(library("EpiModelHIV"))
 sourceDir("source/", FALSE)
 
 ## Environmental Arguments
@@ -14,7 +14,7 @@ fsimno <- paste(simno, jobno, sep = ".")
 load("est/nwstats.10k.rda")
 
 # Base model
-param <- param.msm(nwstats = st,
+param <- param_msm(nwstats = st,
                    testing.pattern = "interval",
                    ai.scale = 1.323,
                    riskh.start = 2450,
@@ -31,22 +31,22 @@ param <- param.msm(nwstats = st,
                    rcomp.adh.groups = 0:4,
                    rcomp.main.only = FALSE,
                    rcomp.discl.only = FALSE)
-init <- init.msm(nwstats = st, prev.B = 0.253, prev.W = 0.253)
-control <- control.msm(simno = fsimno,
+init <- init_msm(nwstats = st, prev.B = 0.253, prev.W = 0.253)
+control <- control_msm(simno = fsimno,
                        nsteps = 52 * 50,
                        nsims = 16,
                        ncores = 16,
                        save.int = 5000,
                        verbose.int = 100,
                        save.other = c("attr", "temp", "riskh", "el", "p"),
-                       acts.FUN = acts.sti,
-                       condoms.FUN = condoms.sti,
-                       initialize.FUN = initialize.sti,
-                       prep.FUN = prep.sti,
-                       prev.FUN = prevalence.sti,
-                       riskhist.FUN = riskhist.sti,
-                       trans.FUN = trans.sti,
-                       test.FUN = test.sti)
+                       acts.FUN = acts.rc,
+                       condoms.FUN = condoms.rc,
+                       initialize.FUN = initialize.rc,
+                       prep.FUN = prep.rc,
+                       prev.FUN = prevalence.rc,
+                       riskhist.FUN = riskhist.rc,
+                       trans.FUN = trans.rc,
+                       test.FUN = test.rc)
 
 ## Simulation
 # netsim_hpc("est/fit.10k.rda", param, init, control, compress = "xz",

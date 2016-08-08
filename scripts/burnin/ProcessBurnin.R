@@ -1,9 +1,9 @@
 
 ## Process burn-in
-library(EpiModelHPC)
+library("EpiModelHPC")
 
 # Examine output
-scp hyak:/gscratch/csde/camp/data/*.rda data/
+system("scp hyak:/gscratch/csde/camp/data/*.rda data/")
 
 sim <- merge_simfiles(1000, indir = "data/", ftype = "min")
 plot(sim, y = "i.prev", ylim = c(0.2, 0.3), qnts = 0.5)
@@ -19,11 +19,11 @@ tail(as.data.frame(sim)$i.prev)
 
 save(sim, file = "est/p2.burnin.rda")
 
-scp est/p2.burnin.rda hyak:/gscratch/csde/camp/est/
+system("scp est/p2.burnin.rda hyak:/gscratch/csde/camp/est/")
 
 
 # check condom failure
-scp hyak:/gscratch/csde/camp/data/*.rda data/
+system("scp hyak:/gscratch/csde/camp/data/*.rda data/")
 
 sim <- merge_simfiles(9000, indir = "data/", ftype = "min")
 
