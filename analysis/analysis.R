@@ -111,7 +111,7 @@ palette(adjustcolor(RColorBrewer::brewer.pal(5, "Set1"), alpha.f = 0.75))
 
 # Figure 1 ------------------------------------------------------------
 
-pdf(file = "../Figure1.pdf", height = 6, width = 10)
+tiff(file = "../Figure1.tiff", height = 1227, width = 2250, units = "px", res = 300, pointsize = 8)
 par(mfrow = c(1,2), mar = c(3,3,2,1), mgp = c(2,1,0))
 
 # Incidence rate
@@ -127,7 +127,7 @@ pred2 <- predict(mod, newdata = nd2, type = "response")
 pred3 <- predict(mod, newdata = nd3, type = "response")
 strt <- mean(c(pred0[1], pred1[1], pred2[1], pred3[1]))
 
-plot(x = pseq, y = pred0, type = "n", lwd = 1, pch = 20, ylim = c(2.2, 2.8),
+plot(x = pseq, y = pred0, type = "n", lwd = 1, pch = 20, ylim = c(1.9, 2.4),
      main = "A. HIV Incidence Rate", col = 1, ylab = "IR per 100 PYAR",
      xlab = "Relative Increase in Risk Compensation", bty = "n")
 grid()
@@ -170,7 +170,7 @@ dev.off()
 
 # Figure 2 ------------------------------------------------------------
 
-pdf(file = "../Figure2.pdf", height = 8, width = 8)
+tiff(file = "../Figure2.tiff", height = 2250, width = 2250, units = "px", res = 300, pointsize = 8)
 par(mfrow = c(2,2), mar = c(3,3,2,1), mgp = c(2,1,0))
 
 mod <- loess(mtrans ~ rcomp*adr, data = df)
