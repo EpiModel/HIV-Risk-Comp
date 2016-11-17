@@ -4,7 +4,7 @@
 suppressMessages(library(EpiModelHIV))
 source("analysis/fx.R")
 
-# scp hyak:/gscratch/csde/camp/data/save/*.rda data/
+system("scp hyak:/gscratch/csde/sjenness/riskcomp/data/save/sim.n2000.rda .")
 
 steps <- 52 *  10
 

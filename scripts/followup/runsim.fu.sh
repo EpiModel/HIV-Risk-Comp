@@ -23,7 +23,7 @@ export MX_RCACHE=0
 module load r_3.2.4
 
 ### App
-ALLARGS="${SIMNO} ${PBS_ARRAYID} ${COV} ${ADR} ${RC1} ${RC2} ${RC3} ${RC4}"
+ALLARGS="${SIMNO} ${PBS_ARRAYID} ${COV} ${ADR} ${RC1} ${RC2} ${RC3} ${RC4} ${RC5}"
 
 ### App
 Rscript sim.fu.R ${ALLARGS}

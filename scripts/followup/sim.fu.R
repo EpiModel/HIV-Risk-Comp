@@ -2,6 +2,7 @@
 ## Packages
 library("methods")
 suppressMessages(library("EpiModelHIV"))
+library("EpiModelHPC")
 
 ## Environmental Arguments
 args <- commandArgs(trailingOnly = TRUE)
@@ -13,6 +14,7 @@ rc1 <- as.numeric(args[5])
 rc2 <- eval(parse(text = args[6]))
 rc3 <- as.logical(args[7])
 rc4 <- as.logical(args[8])
+rc5 <- as.logical(args[9])
 
 # ## Parameters
 fsimno <- paste(simno, jobno, sep = ".")
@@ -34,19 +36,18 @@ param <- param_msm(nwstats = st,
                    rcomp.prob = rc1,
                    rcomp.adh.groups = rc2,
                    rcomp.main.only = rc3,
-                   rcomp.discl.only = rc4)
+                   rcomp.discl.only = rc4,
+                   rcomp.nmain.only = rc5)
 init <- init_msm(st)
 control <- control_msm(simno = fsimno,
                        start = 2601,
                        nsteps = (52 * 50) + 520,
                        nsims = 32,
                        ncores = 16,
-                       save.int = 5000,
-                       verbose.int = 5000,
                        save.other = NULL,
                        initialize.FUN = reinit_msm)
 
 ## Simulation
 netsim_hpc("est/p2.burnin.rda", param, init, control, verbose = FALSE)
 
-# process_simfiles(min.n = 8)
+process_simfiles(simno = simno, min.n = 8, outdir = "data/")

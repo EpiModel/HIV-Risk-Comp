@@ -61,3 +61,18 @@ qsub_master(simno.start = 2300,
             runsimfile = "runsim.fu.sh",
             outfile = "scripts/followup/master.fu.sh")
 
+# RC when with casual partners only
+vars <- list(COV = 0.4,
+             ADR = 0.019,
+             RC1 = seq(0, 1, 0.1),
+             RC2 = "0:3",
+             RC3 = FALSE,
+             RC4 = FALSE,
+             RC5 = TRUE)
+qsub_master(simno.start = 2400,
+            nsubjobs = 8,
+            backfill = FALSE,
+            vars = vars,
+            append = TRUE,
+            runsimfile = "runsim.fu.sh",
+            outfile = "scripts/followup/master.fu.sh")
