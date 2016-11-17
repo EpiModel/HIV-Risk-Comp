@@ -2,7 +2,7 @@
 ## Test Script for stiPrEP Project
 
 library("EpiModelHIV")
-EpiModelHPC::sourceDir("source/", TRUE)
+devtools::load_all("../../../Dev/EpiModelHIV/EpiModelHIV")
 
 load("est/nwstats.10k.rda")
 
@@ -30,15 +30,7 @@ control <- control_msm(simno = 1,
                        ncores = 1,
                        save.int = 5000,
                        verbose.int = 1,
-                       save.other = c("attr", "temp", "riskh", "el", "p"),
-                       acts.FUN = acts_rc,
-                       condoms.FUN = condoms_rc,
-                       initialize.FUN = initialize_rc,
-                       prep.FUN = prep_rc,
-                       prev.FUN = prevalence_rc,
-                       riskhist.FUN = riskhist_rc,
-                       trans.FUN = trans_rc,
-                       test.FUN = test_rc)
+                       save.other = c("attr", "temp", "riskh", "el", "p"))
 
 load("est/fit.10k.rda")
 sim <- netsim(est, param, init, control)
@@ -49,9 +41,7 @@ sim <- netsim(est, param, init, control)
 # follow-up only ----------------------------------------------------------
 
 load("est/nwstats.10k.rda")
-sourceDir("source/", TRUE)
 ai.scale <- 1.323
-prev <- 0.253
 
 param <- param_msm(nwstats = st,
                    testing.pattern = "interval",
@@ -67,7 +57,7 @@ param <- param_msm(nwstats = st,
                    prep.tst.int = 90,
                    prep.risk.int = 182,
                    rcomp.prob = 0,
-                   rcomp.hadhr.only = TRUE,
+                   rcomp.adh.groups = 0:3,
                    rcomp.main.only = FALSE,
                    rcomp.discl.only = FALSE)
 init <- init_msm(st)
@@ -79,38 +69,30 @@ control <- control_msm(simno = 1,
                        save.int = 5000,
                        verbose.int = 1,
                        save.other = NULL,
-                       acts.FUN = acts_rc,
-                       condoms.FUN = condoms_rc,
-                       initialize.FUN = reinit_msm,
-                       prep.FUN = prep_rc,
-                       prev.FUN = prevalence_rc,
-                       riskhist.FUN = riskhist_msm,
-                       trans.FUN = trans_rc,
-                       test.FUN = test_rc)
+                       initialize.FUN = reinit_msm)
 
 ## Simulation
 load("est/p2.burnin.rda")
-# sim <- netsim(sim, param, init, control)
+sim2 <- netsim(sim, param, init, control)
 
 dat <- reinit_msm(sim, param, init, control, s = 1)
 for (at in 2601:2750) {
   dat <- aging_msm(dat, at)
   dat <- deaths_msm(dat, at)
   dat <- births_msm(dat, at)
-  dat <- test_rc(dat, at)
+  dat <- test_msm(dat, at)
   dat <- tx_msm(dat, at)
-  dat <- prep_rc(dat, at)
+  dat <- prep_msm(dat, at)
   dat <- progress_msm(dat, at)
-  dat <- update_vl_msm(dat, at)
-  dat <- edges_correct_msm(dat, at)
+  dat <- vl_msm(dat, at)
   dat <- simnet_msm(dat, at)
   dat <- disclose_msm(dat, at)
-  dat <- acts_rc(dat, at)
-  dat <- condoms_rc(dat, at)
+  dat <- acts_msm(dat, at)
+  dat <- condoms_msm(dat, at)
   dat <- riskhist_msm(dat, at)
   dat <- position_msm(dat, at)
-  dat <- trans_rc(dat, at)
-  dat <- prevalence_rc(dat, at)
+  dat <- trans_msm(dat, at)
+  dat <- prevalence_msm(dat, at)
   cat("*")
 }
 
