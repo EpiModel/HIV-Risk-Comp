@@ -2,7 +2,6 @@
 ## Packages
 library("methods")
 suppressMessages(library("EpiModelHIV"))
-sourceDir("source/", FALSE)
 
 ## Environmental Arguments
 args <- commandArgs(trailingOnly = TRUE)
@@ -45,16 +44,9 @@ control <- control_msm(simno = fsimno,
                        save.int = 5000,
                        verbose.int = 5000,
                        save.other = NULL,
-                       condoms.FUN = condoms_rc,
-                       initialize.FUN = reinit_msm,
-                       prep.FUN = prep_rc,
-                       prev.FUN = prevalence_rc,
-                       riskhist.FUN = riskhist_rc,
-                       trans.FUN = trans_rc,
-                       test.FUN = test_rc)
+                       initialize.FUN = reinit_msm)
 
 ## Simulation
-netsim_hpc("est/p2.burnin.rda", param, init, control, compress = "xz",
-            save.min = TRUE, save.max = FALSE)
+netsim_hpc("est/p2.burnin.rda", param, init, control, verbose = FALSE)
 
 # process_simfiles(min.n = 8)
