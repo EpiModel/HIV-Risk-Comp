@@ -48,13 +48,12 @@ load("data/sim.n2132.rda")
 epi_stats(sim, ir.base, incid.base)
 
 
-
 # Poisson model -----------------------------------------------------------
 # for the figure
 
 fn <- list.files("data/", pattern = "21[0-9][0-9]", full.names = TRUE)
 df <- data.frame(rcomp = NA, adr = NA, cov = NA, incid = NA,
-                 offst = NA, ir = NA, pia = NA, nnt = NA,
+                 offst = NA, ir = NA, pia = NA,
                  mtrans = NA, mtrans.p1 = NA, mtrans.p0 = NA, ptop = NA)
 
 for (i in 1:length(fn)) {
@@ -75,19 +74,21 @@ for (i in 1:length(fn)) {
   adr <- rep(adr, sim$control$nsims)
   cov <- rep(sim$param$prep.coverage, sim$control$nsims)
   sim <- truncate_sim(sim, at = 2600)$epi
-  incid <- unname(colSums(sim$incid))
-  offst <- unname(colSums((1 - sim$i.prev) * sim$num))
+  incid <- unname(colSums(tail(sim$incid, 100)))
+  offst <- unname(colSums((1 - tail(sim$i.prev, 100)) * tail(sim$num, 100)))
   ir <- (incid/offst) * 5200
-  pia <- ((ir.base/1000) - ir)/(ir.base/1000)
-  py.on.prep <- unname(colSums(sim$prepCurr))/52
-  nnt <- py.on.prep/(incid.base - incid)
+  num.comp <- unname(colSums(sim$incid))
+  denom.comp <- unname(colSums((1 - sim$i.prev) * sim$num))
+  ir.comp <- (num.comp / denom.comp) * 5200
+  pia <- ((ir.base/1000) - ir.comp)/(ir.base/1000)
 
   mtrans <- unname(colMeans(sim$mean.trans, na.rm = TRUE)) * 1000
   mtrans.p1 <- unname(colMeans(sim$mean.trans.prep, na.rm = TRUE)) * 1000
   mtrans.p0 <- unname(colMeans(sim$mean.trans.nprep, na.rm = TRUE)) * 1000
+  offst <- unname(colSums((1 - sim$i.prev) * sim$num))
   ptop <- unname(colSums(sim$prepCurr)) / offst
 
-  dft <- data.frame(rcomp, adr, cov, incid, offst, ir, pia, nnt,
+  dft <- data.frame(rcomp, adr, cov, incid, offst, ir, pia,
                     mtrans, mtrans.p1, mtrans.p0, ptop)
   df <- rbind(df, dft)
   cat("*")
