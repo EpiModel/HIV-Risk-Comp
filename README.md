@@ -20,8 +20,7 @@ devtools::install_github("statnet/EpiModelHIV", ref = "hiv-risk-comp")
 
 ### Citation
 
-> Jenness SM, Sharma A, Goodreau SM, Rosenberg ES, Weiss KM, Hoover KW, Smith DK, Sullivan P. Individual HIV Risk versus Population Impact of Risk Compensation after HIV Preexposure Prophylaxis Initiation among Men Who Have Sex with Men. _Under Review_.
-
+> Jenness SM, Sharma A, Goodreau SM, Rosenberg ES, Weiss KM, Hoover KW, Smith DK, Sullivan P. Individual HIV Risk versus Population Impact of Risk Compensation after HIV Preexposure Prophylaxis Initiation among Men Who Have Sex with Men. _PLoS One._ 2017; 12(1): e0169484. [[LINK]](https://www.ncbi.nlm.nih.gov/pubmed/28060881)
 
 <img src="https://github.com/statnet/HIV-Risk-Comp/raw/master/analysis/Figure3.jpg">
 
