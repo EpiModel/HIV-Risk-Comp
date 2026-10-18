@@ -2,6 +2,16 @@
 
 This repository holds the source to code to reproduce the analysis featured in our HIV transmission model among men who have sex with men, as described below. In that model, we investigated the extent and causal mechanisms through which condom-related risk compensation could potentially reduce the effectiveness of HIV preexposure prophylaxis (PrEP).
 
+### Paper and engine
+
+> Jenness SM, Sharma A, Goodreau SM, Rosenberg ES, Weiss KM, Hoover KW, Smith DK, Sullivan P. Individual HIV Risk versus Population Impact of Risk Compensation after HIV Preexposure Prophylaxis Initiation among Men Who Have Sex with Men. _PLoS One._ 2017; 12(1): e0169484. [doi:10.1371/journal.pone.0169484](https://doi.org/10.1371/journal.pone.0169484)
+
+The EpiModelHIV engine for this paper is release [`p2`](https://github.com/EpiModel/EpiModelHIV/releases/tag/p2) of EpiModel/EpiModelHIV. Install it with:
+
+```r
+remotes::install_github("EpiModel/EpiModelHIV@p2")
+```
+
 <img src="https://github.com/statnet/HIV-Risk-Comp/raw/master/analysis/Figure1.jpg">
 
 These models are written and executed in the R statistical software language. To run these files, it is necessary to first install our epidemic modeling software, [EpiModel](http://epimodel.org/), and our extension package specifically for modeling HIV transmission dynamics among MSM, [EpiModelHIV](http://github.com/statnet/EpiModelHIV).
@@ -12,15 +22,11 @@ install.packages("EpiModel")
 
 # install devtools if necessary, install.packages("devtools")
 devtools::install_github("statnet/tergmLite", ref = "preFastEl")
-devtools::install_github("statnet/EpiModelHIV", ref = "hiv-risk-comp")
+devtools::install_github("statnet/EpiModelHIV", ref = "p2")
 ```
 
 <img src="https://github.com/statnet/HIV-Risk-Comp/raw/master/analysis/Figure2.jpg">
 
-
-### Citation
-
-> Jenness SM, Sharma A, Goodreau SM, Rosenberg ES, Weiss KM, Hoover KW, Smith DK, Sullivan P. Individual HIV Risk versus Population Impact of Risk Compensation after HIV Preexposure Prophylaxis Initiation among Men Who Have Sex with Men. _PLoS One._ 2017; 12(1): e0169484. [[LINK]](https://www.ncbi.nlm.nih.gov/pubmed/28060881)
 
 <img src="https://github.com/statnet/HIV-Risk-Comp/raw/master/analysis/Figure3.jpg">
 
